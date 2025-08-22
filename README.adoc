@@ -1,0 +1,176 @@
+= MaleficMobile Template
+OmyDaGreat
+
+[.custom-toc]
+--
+[cols="1a", frame="none", grid="none"]
+|===
+| 📚 **Table of Contents**
+
+* <<introduction,Introduction>>
+* <<prerequisites,Prerequisites>>
+* <<getting-started,Getting Started>>
+  ** <<clone,Clone the Repository>>
+  ** <<open-project,Open the Project in IntelliJ IDEA>>
+  ** <<configure-emulator,Configure the Android Emulator>>
+  ** <<build-run,Build and Run on Emulator>>
+* <<project-structure,Project Structure>>
+* <<customize,Customizing Your App>>
+  ** <<change-name,Change the App Name & Icon>>
+  ** <<theme,Update Colors & Theme>>
+  ** <<first-screen,Build Your First Screen>>
+  ** <<add-features,Add Features>>
+* <<example,Example: Adding a Button>>
+* <<help,Need Help?>>
+* <<license,License>>
+|===
+--
+
+[id="introduction"]
+== Introduction
+
+MaleficMobile is a Kotlin Multiplatform template designed for UI developers who want to quickly build basic, functional mobile applications with Compose Multiplatform.  
+This template targets both Android and iOS, sharing all UI and logic via KMP.
+
+[id="prerequisites"]
+== Prerequisites
+
+* Java 17+
+* Git
+* IntelliJ IDEA
+* Android SDK and Emulator tools installed (see below)
+* (For iOS): Xcode and a Mac, if you want to build/run on iOS
+
+[id="getting-started"]
+== Getting Started
+
+[id="clone"]
+=== 1. Clone the Repository
+
+[source,sh]
+----
+git clone https://github.com/OmyDaGreat/MaleficMobile.git
+cd MaleficMobile
+----
+
+[id="open-project"]
+=== 2. Open the Project in IntelliJ IDEA
+
+* Launch IntelliJ IDEA.
+* Select _Open_ and choose the `MaleficMobile` folder.
+* Allow Gradle to import the project and finish syncing dependencies.
+
+[id="configure-emulator"]
+=== 3. Configure the Android Emulator
+
+To run the app, you need an Android Virtual Device (AVD):
+
+. Open the **Device Manager**:
+  * Go to _View > Tool Windows > Device Manager_ in IntelliJ IDEA.
+. Click **Create Device**.
+. Choose a device profile (e.g., Pixel 4), then click _Next_.
+. Select a system image (recommended: latest "x86_64" or ARM image for your CPU).
+. Accept license agreements and download the system image if prompted.
+. Click _Next_, name your AVD, and click _Finish_.
+
+[TIP]
+====
+If you have an AMD CPU, ensure that virtualization (SVM) is enabled in your BIOS/UEFI.  
+If you encounter errors on Linux, try installing `qemu` and `libvirt` as needed for hardware acceleration.
+====
+
+[id="build-run"]
+=== 4. Build and Run on Emulator
+
+. Open the **Device Manager** and start your AVD if it isn't already running.
+. In IntelliJ IDEA, locate the `composeApp` module under `composeApp/src/androidMain/kotlin/com/jetbrains/kmpapp/`.
+. Open `MainActivity.kt` to ensure you're in the Android project context.
+. Select your running emulator from the device selector dropdown.
+. Click the green play (▶️) button, or right-click `MainActivity.kt` and choose _Run_.
+
+You should see the MaleficMobile app launch inside your emulator.
+
+[id="project-structure"]
+== Project Structure
+
+MaleficMobile is a true Kotlin Multiplatform project, sharing business logic and UI implementation across Android and iOS.
+
+[source,plaintext]
+----
+MaleficMobile/
+├── composeApp/                                   # Shared Kotlin Multiplatform module (business logic + Compose UI)
+│   └── src/
+│       ├── androidMain/                          # Android-specific code
+│       │   └── kotlin/com/jetbrains/kmpapp/
+│       │       ├── MainActivity.kt               # Android entry Activity, launches Compose
+│       │       └── MobileApp.kt                  # Android Application class (for DI/init)
+│       ├── iosMain/                              # iOS-specific code
+│       │   └── kotlin/com/jetbrains/kmpapp/
+│       │       └── MainViewController.kt         # Entrypoint for Compose UI on iOS (UIViewController)
+│       └── commonMain/                           # Shared Kotlin code (runs on both Android/iOS)
+│           └── kotlin/com/jetbrains/kmpapp/
+│               ├── App.kt                        # Main Composable, root of the UI
+│               └── screens/
+│                   └── EmptyScreenContent.kt     # Example screen (shows "no data available")
+├── iosApp/                                       # Native iOS application wrapper (Swift/SwiftUI)
+│   └── iosApp/
+│       ├── ContentView.swift                     # Bridges Compose UI into SwiftUI via UIViewControllerRepresentable
+│       └── iOSApp.swift                          # iOS app entry point (calls into Koin & Compose)
+├── README.md                                     # Project documentation (GitHub)
+----
+
+[id="customize"]
+== Customizing Your App
+
+[id="change-name"]
+=== 1. Change the App Name & Icon
+
+* Edit `composeApp/src/androidMain/AndroidManifest.xml` for the app name.
+* Replace icons in `composeApp/src/androidMain/res/mipmap-*`.
+
+[id="theme"]
+=== 2. Update Colors & Theme
+
+* Open `composeApp/src/commonMain/kotlin/com/jetbrains/kmpapp/App.kt` to update theming.
+* Adjust Material3 color schemes, typography, and shapes as you wish.
+
+[id="first-screen"]
+=== 3. Build Your First Screen
+
+* Edit `composeApp/src/commonMain/kotlin/com/jetbrains/kmpapp/screens/EmptyScreenContent.kt` or add new files to `screens/`.
+* Use Compose UI components to add buttons, text fields, and more. See provided examples and comments.
+
+[id="add-features"]
+=== 4. Add Features
+
+* To add a new screen:
+  - Create a new composable in `composeApp/src/commonMain/kotlin/com/jetbrains/kmpapp/screens/`.
+* Use any state management or DI you prefer.
+
+[id="example"]
+== Example: Adding a Button
+
+[source,kotlin]
+----
+@Composable
+fun MainScreen() {
+    var count by remember { mutableStateOf(0) }
+    Column {
+        Text("You've clicked $count times")
+        Button(onClick = { count++ }) {
+            Text("Click me!")
+        }
+    }
+}
+----
+
+[id="help"]
+== Need Help?
+
+* Open an issue in the GitHub repo.
+* See the official documentation for [Kotlin Multiplatform Mobile](https://kotlinlang.org/docs/multiplatform-mobile-getting-started.html) and [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform).
+
+[id="license"]
+== License
+
+This project is licensed under the MIT License. See `LICENSE` for details.
