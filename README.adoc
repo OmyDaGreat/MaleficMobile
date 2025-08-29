@@ -111,11 +111,12 @@ MaleficMobile/
 │           └── kotlin/com/jetbrains/kmpapp/
 │               ├── App.kt                        # Main Composable, root of the UI
 │               └── screens/
-│                   └── EmptyScreenContent.kt     # Example screen (shows "no data available")
+│                   ├── EmptyScreen.kt     # Example screen (shows "no data available")
+│                   └── DemoScreen.kt     # Example screen (shows "no data available")
 ├── iosApp/                                       # Native iOS application wrapper (Swift/SwiftUI)
 │   └── iosApp/
 │       ├── ContentView.swift                     # Bridges Compose UI into SwiftUI via UIViewControllerRepresentable
-│       └── iOSApp.swift                          # iOS app entry point (calls into Koin & Compose)
+│       └── iOSApp.swift                          # iOS app entry point (calls into Compose)
 ├── README.md                                     # Project documentation (GitHub)
 ----
 

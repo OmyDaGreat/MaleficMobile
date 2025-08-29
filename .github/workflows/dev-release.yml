@@ -49,6 +49,13 @@ jobs:
       - name: Install CocoaPods
         run: sudo gem install cocoapods
 
+      - name: Ensure Podfile exists
+        run: |
+          cd iosApp
+          if [ ! -f Podfile ]; then
+          pod init
+          fi
+
       - name: Install iOS dependencies
         run: |
           cd iosApp
