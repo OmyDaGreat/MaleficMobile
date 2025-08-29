@@ -23,9 +23,9 @@ fun DemoScreen(modifier: Modifier = Modifier) {
     var counter by remember { mutableStateOf(0) }
 
     Column(
-        modifier = modifier.padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier.padding(16.dp),
+        Arrangement.spacedBy(12.dp),
+        Alignment.CenterHorizontally,
     ) {
         Text("Demo page")
 

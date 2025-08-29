@@ -6,6 +6,9 @@ on:
       - main
       - dev
 
+permissions:
+  contents: write
+
 jobs:
   build-android:
     runs-on: ubuntu-latest
