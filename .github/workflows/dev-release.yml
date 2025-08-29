@@ -30,65 +30,8 @@ jobs:
           name: android-apk
           path: composeApp/build/outputs/apk/debug/*.apk
 
-  build-ios:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v5
-
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: 17
-
-      - name: Set up Ruby (for CocoaPods)
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1'
-
-      - name: Install CocoaPods
-        run: sudo gem install cocoapods
-
-      - name: Ensure Podfile exists
-        run: |
-          cd iosApp
-          if [ ! -f Podfile ]; then
-          pod init
-          fi
-
-      - name: Install iOS dependencies
-        run: |
-          cd iosApp
-          pod install
-
-      - name: Build iOS app (unsigned .ipa)
-        run: |
-          cd iosApp
-          xcodebuild -workspace iosApp.xcworkspace \
-            -scheme iosApp \
-            -sdk iphoneos \
-            -configuration Release \
-            -archivePath $PWD/build/iosApp.xcarchive archive
-          xcodebuild -exportArchive \
-            -archivePath $PWD/build/iosApp.xcarchive \
-            -exportPath $PWD/build/exported \
-            -exportOptionsPlist ExportOptions.plist || true
-
-      - name: Find IPA
-        id: find-ipa
-        run: |
-          IPA_PATH=$(find iosApp/build/exported -name "*.ipa" | head -n 1)
-          echo "ipa_path=$IPA_PATH" >> $GITHUB_OUTPUT
-
-      - name: Upload iOS IPA
-        if: steps.find-ipa.outputs.ipa_path != ''
-        uses: actions/upload-artifact@v4
-        with:
-          name: ios-ipa
-          path: ${{ steps.find-ipa.outputs.ipa_path }}
-
   release:
-    needs: [build-android, build-ios]
+    needs: [build-android]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -98,12 +41,6 @@ jobs:
         with:
           name: android-apk
           path: artifacts/android
-
-      - name: Download iOS IPA
-        uses: actions/download-artifact@v5
-        with:
-          name: ios-ipa
-          path: artifacts/ios
 
       - name: Generate AI Commit Summary
         id: ai-summary
@@ -146,6 +83,5 @@ jobs:
           body: ${{ steps.get-summary.outputs.summary }}
           files: |
             artifacts/android/*.apk
-            artifacts/ios/*.ipa
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
