@@ -41,6 +41,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Download Android APK
         uses: actions/download-artifact@v5
@@ -48,22 +50,28 @@ jobs:
           name: android-apk
           path: artifacts/android
 
-      - name: Generate Commit Summary
-        id: summary
+      - name: Generate commit list since last dev build
+        id: changelog
+        shell: bash
         run: |
-          COMMIT_MSG=$(git log -1 --pretty=%B)
-          AUTHOR=$(git log -1 --pretty=%an)
-          SHORT_SHA=$(git rev-parse --short HEAD)
-          DATE=$(git log -1 --pretty=%cd --date=iso)
-          printf "## 🚀 Auto-generated Build Summary\n\n" > summary.md
-          printf "> **Commit:** \`$SHORT_SHA\` by **$AUTHOR**\n" >> summary.md
-          printf "> **Date:** $DATE\n\n" >> summary.md
-          printf "### 📝 Latest Commit Message\n" >> summary.md
-          # Escape Markdown code-fence backticks to avoid shell command substitution
-          printf "\`\`\`\n%s\n\`\`\`\n\n" "$COMMIT_MSG" >> summary.md
-          printf "----\n" >> summary.md
-          printf "<sub>🤖 This pre-release and summary were generated automatically by GitHub Actions AI.</sub>\n" >> summary.md
-          echo "summary_path=summary.md" >> $GITHUB_OUTPUT
+          set -euo pipefail
+          git fetch --tags --force --prune
+          MARKER_TAG="dev-build-marker"
+
+          echo "## Changes since last dev build" > commits.md
+
+          if git rev-parse -q --verify "refs/tags/$MARKER_TAG" > /dev/null; then
+            RANGE="$MARKER_TAG..HEAD"
+            COUNT=$(git rev-list --count "$RANGE")
+            if [ "$COUNT" -gt 0 ]; then
+              git log --no-merges --pretty=format:'- %h %s (by %an, %cd)' --date=short "$RANGE" >> commits.md
+            else
+              echo "- No changes." >> commits.md
+            fi
+          else
+            # First dev build: show recent history (last 50 commits)
+            git log -n 50 --no-merges --pretty=format:'- %h %s (by %an, %cd)' --date=short >> commits.md
+          fi
 
       - name: Create/Update Pre-release
         uses: softprops/action-gh-release@v2
@@ -71,8 +79,16 @@ jobs:
           tag_name: dev-latest
           name: Latest Dev Build
           prerelease: true
-          body_path: ${{ steps.summary.outputs.summary_path }}
+          body_path: commits.md
           files: |
             artifacts/android/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update dev build marker tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          MARKER_TAG="dev-build-marker"
+          git tag -f "$MARKER_TAG" HEAD
+          git push origin -f "refs/tags/$MARKER_TAG"
