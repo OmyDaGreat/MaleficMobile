@@ -24,6 +24,9 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Grant execute permission for Gradle wrapper
+        run: chmod +x gradlew
+
       - name: Build Android APK
         run: ./gradlew :composeApp:assembleDebug
 
@@ -56,16 +59,11 @@ jobs:
           printf "> **Commit:** \`$SHORT_SHA\` by **$AUTHOR**\n" >> summary.md
           printf "> **Date:** $DATE\n\n" >> summary.md
           printf "### 📝 Latest Commit Message\n" >> summary.md
-          printf "```\n%s\n```\n\n" "$COMMIT_MSG" >> summary.md
+          # Escape Markdown code-fence backticks to avoid shell command substitution
+          printf "\`\`\`\n%s\n\`\`\`\n\n" "$COMMIT_MSG" >> summary.md
           printf "----\n" >> summary.md
           printf "<sub>🤖 This pre-release and summary were generated automatically by GitHub Actions AI.</sub>\n" >> summary.md
           echo "summary_path=summary.md" >> $GITHUB_OUTPUT
-
-      - name: Read summary for release notes
-        id: get-summary
-        run: |
-          SUMMARY=$(awk '{printf "%s\\n", $0}' summary.md)
-          echo "summary=$SUMMARY" >> $GITHUB_OUTPUT
 
       - name: Create/Update Pre-release
         uses: softprops/action-gh-release@v2
@@ -73,7 +71,7 @@ jobs:
           tag_name: dev-latest
           name: Latest Dev Build
           prerelease: true
-          body: ${{ steps.get-summary.outputs.summary }}
+          body_path: ${{ steps.summary.outputs.summary_path }}
           files: |
             artifacts/android/*.apk
         env:

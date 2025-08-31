@@ -49,19 +49,18 @@ kotlin {
             implementation(libs.lifecycle.runtime.compose)
             implementation(libs.material.icons.core)
 
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.bundles.ktor)
 
-            implementation(libs.coil.compose)
-            implementation(libs.coil.network.ktor)
+            implementation(libs.bundles.coil)
+
+            implementation(libs.bundles.malefic)
         }
     }
 }
 
 android {
     namespace = "com.jetbrains.kmpapp"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.jetbrains.kmpapp"
