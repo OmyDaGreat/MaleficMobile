@@ -21,6 +21,7 @@ OmyDaGreat
   ** <<first-screen,Build Your First Screen>>
   ** <<add-features,Add Features>>
 * <<example,Example: Adding a Button>>
+* <<documentation-site,📖 Complete Documentation Site>>
 * <<help,Need Help?>>
 * <<license,License>>
 |===
@@ -31,6 +32,19 @@ OmyDaGreat
 
 MaleficMobile is a Kotlin Multiplatform template designed for UI developers who want to quickly build basic, functional mobile applications with Compose Multiplatform.  
 This template targets both Android and iOS, sharing all UI and logic via KMP.
+
+[IMPORTANT]
+====
+🌟 **New!** We now have a comprehensive documentation website available in the `docs-site/` directory! 
+
+For a better reading experience with interactive examples, code highlighting, and step-by-step visual guides, check out the full documentation site.
+
+To view it locally:
+```bash
+./docs-dev.sh serve
+# Then open http://localhost:8080
+```
+====
 
 [id="prerequisites"]
 == Prerequisites
@@ -164,6 +178,40 @@ fun MainScreen() {
     }
 }
 ----
+
+[id="documentation-site"]
+== 📖 Complete Documentation Site
+
+This repository includes a comprehensive documentation website designed specifically for beginners. The site features:
+
+* **Interactive Examples**: Tabbed code examples with copy buttons
+* **Visual Step-by-Step Guides**: Detailed instructions with screenshots
+* **Responsive Design**: Works perfectly on all device sizes
+* **Modern UI**: Clean, professional design inspired by popular documentation sites
+* **Progressive Enhancement**: Fully functional even without JavaScript
+
+=== Accessing the Documentation
+
+*Local Development:*
+```bash
+./docs-dev.sh serve
+# Opens http://localhost:8080
+```
+
+*Production (GitHub Pages):*
+The documentation will be automatically deployed to GitHub Pages when merged to main.
+
+=== Documentation Features
+
+* Complete beginner-friendly setup guide
+* Project structure explanation with visual diagrams
+* Customization tutorials for app name, icon, and theming
+* Real-world code examples (counter, forms, lists, network calls)
+* Advanced topics (navigation, state management, dependency injection)
+* Troubleshooting guide and FAQ
+* Mobile-responsive design
+
+The documentation site is built with vanilla HTML, CSS, and JavaScript to ensure it's lightweight, fast, and easy to maintain.
 
 [id="help"]
 == Need Help?
