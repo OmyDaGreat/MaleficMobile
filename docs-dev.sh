@@ -7,7 +7,7 @@ set -e
 
 DOCS_DIR="docs-site"
 PORT=8080
-BUILD_DIR="build/distributions"
+BUILD_DIR="build/dist/js/developmentExecutable"
 
 echo "🚀 MaleficMobile Documentation Helper (Compose HTML)"
 echo "===================================================="
@@ -22,7 +22,7 @@ fi
 # Function to build the documentation
 build_docs() {
     echo "🔨 Building documentation with Gradle..."
-    ./gradlew :docs-site:jsBrowserDevelopmentWebpack
+    ./gradlew :docs-site:jsBrowserDevelopmentExecutableDistribution
     echo "✅ Documentation built successfully"
 }
 

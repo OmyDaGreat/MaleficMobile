@@ -37,7 +37,7 @@ jobs:
         uses: gradle/gradle-build-action@v3
       
       - name: Build Documentation
-        run: ./gradlew :docs-site:jsBrowserProductionWebpack
+        run: ./gradlew :docs-site:jsBrowserProductionExecutableDistribution
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -45,7 +45,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './docs-site/build/distributions'
+          path: './docs-site/build/dist/js/productionExecutable'
       
       - name: Deploy to GitHub Pages
         id: deployment
