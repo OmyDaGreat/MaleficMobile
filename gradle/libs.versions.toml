@@ -47,3 +47,6 @@ kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 malefic = ["malefic-theming", "malefic-comps"]
 ktor = ["ktor-client-content-negotiation", "ktor-client-core", "ktor-serialization-kotlinx-json"]
 coil = ["coil-compose", "coil-network-ktor"]
+compose = []
+kobweb = ["kobweb-core", "kobweb-silk-core"]
+silk-icons = ["kobweb-silk-icons-fa"]
