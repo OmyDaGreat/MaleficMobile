@@ -1,10 +1,118 @@
-# MaleficMobile Documentation
+# MaleficMobile Documentation Site
 
-This directory contains a comprehensive documentation website for the MaleficMobile Kotlin Multiplatform template.
+This directory contains the documentation website for MaleficMobile, built with **Compose HTML**.
 
-## 📖 What's Included
+## 🚀 Quick Start
 
-The documentation covers:
+### Local Development
+```bash
+# From the project root
+./docs-dev.sh serve
+```
+
+This will:
+1. Build the documentation using Gradle
+2. Start a local development server
+3. Open the site at http://localhost:8080
+
+### Available Commands
+
+```bash
+./docs-dev.sh build    # Build documentation only
+./docs-dev.sh watch    # Watch for changes and rebuild
+./docs-dev.sh clean    # Clean build artifacts
+./docs-dev.sh info     # Show build information
+./docs-dev.sh help     # Show help
+```
+
+## 🏗️ Technology Stack
+
+- **Framework**: Compose HTML (Kotlin/JS)
+- **Build Tool**: Gradle with Kotlin DSL
+- **Styling**: CSS-in-Kotlin with Compose Web CSS API
+- **Deployment**: GitHub Pages with automated builds
+
+## 📁 Project Structure
+
+```
+docs-site/
+├── src/jsMain/
+│   ├── kotlin/com/maleficmobile/docs/
+│   │   └── Main.kt              # Main application logic
+│   └── resources/
+│       └── index.html           # HTML template
+├── build.gradle.kts             # Build configuration
+└── README.md                    # This file
+```
+
+## 🎨 Features
+
+- **Responsive Design**: Mobile-first approach with desktop enhancements
+- **Interactive Navigation**: Single-page application with smooth section switching
+- **Modern Styling**: Professional gradient themes and typography
+- **Code Syntax Highlighting**: Readable code examples with proper formatting
+- **Accessible**: Semantic HTML and proper contrast ratios
+
+## 🔧 Development
+
+### Making Changes
+
+1. Edit source files in `src/jsMain/kotlin/`
+2. Run `./docs-dev.sh build` to rebuild
+3. Or use `./docs-dev.sh watch` for automatic rebuilds
+
+### Adding Content
+
+The documentation content is defined in the Kotlin source file. To add new sections:
+
+1. Add a new function for your content (e.g., `MyNewSection()`)
+2. Add navigation item in the sidebar
+3. Add case in the `when` statement in `Main.kt`
+
+### Styling
+
+Styles are defined using Compose Web CSS API in the `Style` block. The design uses:
+- Professional gradients (purple to blue)
+- Modern typography (system fonts)
+- Responsive grid layouts
+- Smooth transitions and hover effects
+
+## 🚀 Deployment
+
+The site is automatically deployed to GitHub Pages when changes are pushed to the `main` branch.
+
+### Manual Deployment
+
+```bash
+# Build for production
+./gradlew :docs-site:jsBrowserProductionWebpack
+
+# Files will be in build/distributions/
+```
+
+## 🧪 Testing
+
+```bash
+# Build and test locally
+./docs-dev.sh serve
+
+# Check build artifacts
+./docs-dev.sh info
+
+# Clean and rebuild
+./docs-dev.sh clean && ./docs-dev.sh build
+```
+
+## 💡 Tips
+
+- The site is a single-page application with client-side navigation
+- All content is bundled into a single JavaScript file for fast loading
+- The design is mobile-first and works well on all screen sizes
+- Code examples use monospace fonts and proper syntax highlighting
+
+## 📖 Content Coverage
+
+The documentation includes:
 
 - **Getting Started**: Step-by-step setup instructions for complete beginners
 - **Prerequisites**: Detailed requirements and installation guides
@@ -14,38 +122,6 @@ The documentation covers:
 - **Advanced Topics**: Navigation, state management, dependency injection
 - **Troubleshooting**: FAQ and common issue resolution
 
-## 🎨 Design Features
-
-- **Modern UI**: Clean, professional design inspired by popular documentation sites
-- **Responsive**: Works perfectly on desktop, tablet, and mobile devices
-- **Interactive**: Expandable sections, tabbed examples, and smooth navigation
-- **Code Highlighting**: Syntax-highlighted code blocks with copy buttons
-- **Progressive Enhancement**: Works without JavaScript but enhanced with it
-
-## 🚀 Local Development
-
-To run the documentation locally:
-
-```bash
-cd docs-site
-python3 -m http.server 8080
-```
-
-Then open http://localhost:8080 in your browser.
-
-## 📁 Structure
-
-```
-docs-site/
-├── index.html              # Main documentation page
-├── styles/
-│   └── main.css            # All styling (responsive, modern)
-├── js/
-│   └── main.js             # Interactive features
-├── visual-guide.html       # Example of visual guide structure
-└── README.md               # This file
-```
-
 ## 🎯 Target Audience
 
 This documentation is specifically designed for:
@@ -53,46 +129,3 @@ This documentation is specifically designed for:
 - **Complete Beginners**: New to Kotlin Multiplatform or mobile development
 - **UI Developers**: Familiar with mobile development but new to KMP
 - **Quick Starters**: Developers who want to get up and running fast
-
-## 🔧 Deployment
-
-The documentation is set up to deploy automatically to GitHub Pages when changes are pushed to the main branch. See `.github/workflows/deploy-docs.yml` for the deployment configuration.
-
-## 📝 Contributing
-
-To improve the documentation:
-
-1. Edit the HTML content in `index.html`
-2. Modify styles in `styles/main.css`
-3. Add interactive features in `js/main.js`
-4. Test locally before committing
-
-## 🖼️ Adding Visual Content
-
-The documentation is designed to include screenshots and diagrams. To add visual content:
-
-1. Create an `images/` directory
-2. Add screenshots of:
-   - IDE setup process
-   - Emulator configuration
-   - Running app examples
-   - Code editor views
-   - Build processes
-
-3. Update the HTML to reference the images
-4. Ensure images are optimized for web (WebP format recommended)
-
-## 📋 TODO / Future Enhancements
-
-- [ ] Add actual screenshots for all setup steps
-- [ ] Create animated GIFs for complex processes
-- [ ] Add search functionality
-- [ ] Implement dark mode toggle
-- [ ] Add print-friendly styles
-- [ ] Create PDF export option
-- [ ] Add multi-language support
-- [ ] Integrate with project's actual code examples
-
-## 📄 License
-
-This documentation is part of the MaleficMobile project and follows the same MIT license.

@@ -1,15 +1,16 @@
 #!/bin/bash
 
 # MaleficMobile Documentation Development Helper
-# This script helps with local development of the documentation site
+# This script helps with local development of the Compose HTML documentation site
 
 set -e
 
 DOCS_DIR="docs-site"
 PORT=8080
+BUILD_DIR="build/distributions"
 
-echo "🚀 MaleficMobile Documentation Helper"
-echo "====================================="
+echo "🚀 MaleficMobile Documentation Helper (Compose HTML)"
+echo "===================================================="
 
 # Check if we're in the right directory
 if [ ! -d "$DOCS_DIR" ]; then
@@ -18,10 +19,22 @@ if [ ! -d "$DOCS_DIR" ]; then
     exit 1
 fi
 
+# Function to build the documentation
+build_docs() {
+    echo "🔨 Building documentation with Gradle..."
+    ./gradlew :docs-site:jsBrowserDevelopmentWebpack
+    echo "✅ Documentation built successfully"
+}
+
 # Function to start local server
 start_server() {
-    echo "🌟 Starting local documentation server..."
-    cd "$DOCS_DIR"
+    echo "🌟 Building and starting local documentation server..."
+    
+    # Build first
+    build_docs
+    
+    # Navigate to the built documentation
+    cd "$DOCS_DIR/$BUILD_DIR"
     
     # Try different methods to start a local server
     if command -v python3 &> /dev/null; then
@@ -52,34 +65,49 @@ start_server() {
     fi
 }
 
-# Function to validate HTML
-validate_html() {
-    echo "🔍 Validating HTML structure..."
-    if command -v xmllint &> /dev/null; then
-        xmllint --html --noout "$DOCS_DIR/index.html" 2>/dev/null && echo "✅ HTML is valid" || echo "⚠️ HTML validation warnings"
-    else
-        echo "⚠️ xmllint not found, skipping HTML validation"
-    fi
-}
-
-# Function to check for broken links (basic)
-check_links() {
-    echo "🔗 Checking internal links..."
-    if command -v grep &> /dev/null; then
-        echo "Checking for internal anchor links..."
-        grep -o 'href="#[^"]*"' "$DOCS_DIR/index.html" | sort | uniq
-    fi
-}
-
-# Function to optimize images (if any exist)
-optimize_images() {
-    echo "🖼️ Checking for images to optimize..."
-    if [ -d "$DOCS_DIR/images" ]; then
-        find "$DOCS_DIR/images" -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" | while read -r image; do
-            echo "Found image: $image"
+# Function to watch and rebuild
+watch_docs() {
+    echo "👀 Starting watch mode..."
+    echo "🔄 This will rebuild documentation when source files change"
+    echo "📝 Press Ctrl+C to stop watching"
+    
+    # Simple file watching (requires inotify-tools on Linux)
+    if command -v inotifywait &> /dev/null; then
+        while true; do
+            inotifywait -r -e modify,create,delete "$DOCS_DIR/src" && {
+                echo "🔄 Changes detected, rebuilding..."
+                build_docs
+            }
         done
     else
-        echo "📁 No images directory found - create one when adding screenshots"
+        echo "⚠️ File watching not available (install inotify-tools on Linux)"
+        echo "💡 Manually run '$0 build' after making changes"
+    fi
+}
+
+# Function to clean build artifacts
+clean_build() {
+    echo "🧹 Cleaning build artifacts..."
+    ./gradlew :docs-site:clean
+    echo "✅ Build artifacts cleaned"
+}
+
+# Function to show build info
+show_build_info() {
+    echo "📊 Documentation Build Information:"
+    echo "=====================================:"
+    echo "Source directory: $DOCS_DIR/src"
+    echo "Build directory: $DOCS_DIR/$BUILD_DIR"
+    echo "Kotlin/JS target: Browser"
+    echo "Framework: Compose HTML"
+    
+    if [ -f "$DOCS_DIR/$BUILD_DIR/index.html" ]; then
+        echo "✅ Documentation is built"
+        echo "📂 Built files:"
+        ls -la "$DOCS_DIR/$BUILD_DIR/"
+    else
+        echo "❌ Documentation not built yet"
+        echo "💡 Run '$0 build' to build the documentation"
     fi
 }
 
@@ -88,17 +116,19 @@ show_help() {
     echo "Usage: $0 [command]"
     echo ""
     echo "Commands:"
-    echo "  serve     Start local development server (default)"
-    echo "  validate  Validate HTML structure"
-    echo "  links     Check internal links"
-    echo "  images    Check and optimize images"
+    echo "  serve     Build and start local development server (default)"
+    echo "  build     Build documentation only"
+    echo "  watch     Watch for changes and rebuild automatically"
+    echo "  clean     Clean build artifacts"
+    echo "  info      Show build information"
     echo "  help      Show this help message"
     echo ""
     echo "Examples:"
-    echo "  $0                  # Start development server"
-    echo "  $0 serve            # Start development server"
-    echo "  $0 validate         # Validate HTML"
-    echo "  $0 links            # Check links"
+    echo "  $0                  # Build and start development server"
+    echo "  $0 serve            # Build and start development server"
+    echo "  $0 build            # Build documentation only"
+    echo "  $0 watch            # Watch and rebuild on changes"
+    echo "  $0 clean            # Clean build artifacts"
 }
 
 # Main logic
@@ -106,14 +136,17 @@ case "${1:-serve}" in
     "serve")
         start_server
         ;;
-    "validate")
-        validate_html
+    "build")
+        build_docs
         ;;
-    "links")
-        check_links
+    "watch")
+        watch_docs
         ;;
-    "images")
-        optimize_images
+    "clean")
+        clean_build
+        ;;
+    "info")
+        show_build_info
         ;;
     "help"|"--help"|"-h")
         show_help
