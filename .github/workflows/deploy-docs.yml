@@ -36,8 +36,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v3
       
-      - name: Build Documentation
-        run: ./gradlew :docs-site:jsBrowserProductionExecutableDistribution
+      - name: Build Documentation with Kobweb
+        run: |
+          cd docs-site
+          ../gradlew kobwebExport
+          cd ..
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -45,7 +48,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './docs-site/build/dist/js/productionExecutable'
+          path: './docs-site/.kobweb/site'
       
       - name: Deploy to GitHub Pages
         id: deployment
