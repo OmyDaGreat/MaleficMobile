@@ -1,0 +1,14 @@
+site:
+  title: "MaleficMobile Documentation"
+
+server:
+  files:
+    dev:
+      contentRoot: "build/processedResources/js/main/public"
+      script: "build/kotlin-webpack/js/developmentExecutable/maleficmobile-docs.js"
+      api: "build/libs/maleficmobile-docs.jar"
+    prod:
+      script: "build/kotlin-webpack/js/productionExecutable/maleficmobile-docs.js"
+      siteRoot: ".kobweb/site"
+
+  port: 8080

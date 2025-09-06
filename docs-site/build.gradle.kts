@@ -1,28 +1,31 @@
+import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kobweb.application)
 }
 
 group = "com.maleficmobile.docs"
 version = "1.0.0"
 
-kotlin {
-    js(IR) {
-        browser {
-            commonWebpackConfig {
-                outputFileName = "docs.js"
-            }
+kobweb {
+    app {
+        index {
+            description.set("MaleficMobile Documentation - Kotlin Multiplatform Template")
         }
-        binaries.executable()
     }
+}
+
+kotlin {
+    configAsKobwebApplication("maleficmobile-docs")
 
     sourceSets {
-        val jsMain by getting {
-            dependencies {
-                implementation(compose.html.core)
-                implementation(compose.runtime)
-            }
+        jsMain.dependencies {
+            implementation(libs.bundles.compose)
+            implementation(libs.bundles.kobweb)
+            implementation(libs.bundles.silk.icons)
         }
     }
 }

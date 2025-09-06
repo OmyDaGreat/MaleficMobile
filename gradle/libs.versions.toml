@@ -5,7 +5,7 @@ androidx-ui-tooling = "1.9.0"
 coil = "3.3.0"
 compose-multiplatform = "1.8.2"
 kotlin = "2.2.10"
-kobweb = "0.19.2"
+kobweb = "0.23.2"
 ktor = "3.2.3"
 materialIconsCore = "1.7.3"
 navigationCompose = "2.9.0-rc01"
@@ -20,8 +20,13 @@ androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 coil-network-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor3", version.ref = "coil" }
 kobweb-core = { group = "com.varabyte.kobweb", name = "kobweb-core", version.ref = "kobweb" }
+kobweb-silk = { group = "com.varabyte.kobweb", name = "kobweb-silk", version.ref = "kobweb" }
 kobweb-silk-core = { group = "com.varabyte.kobweb", name = "kobweb-silk", version.ref = "kobweb" }
-kobweb-silk-icons-fa = { group = "com.varabyte.kobweb", name = "kobweb-silk-icons-fa", version.ref = "kobweb" }
+kobweb-silk-icons-fa = { group = "com.varabyte.kobwebx", name = "silk-icons-fa", version.ref = "kobweb" }
+kobwebx-serialization-kotlinx = { group = "com.varabyte.kobwebx", name = "kobwebx-serialization-kotlinx", version.ref = "kobweb" }
+silk-foundation = { group = "com.varabyte.kobweb", name = "silk-foundation", version.ref = "kobweb" }
+compose-html-core = { group = "org.jetbrains.compose.html", name = "html-core", version.ref = "compose-multiplatform" }
+compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "compose-multiplatform" }
 kobwebx-markdown = { group = "com.varabyte.kobwebx", name = "kobwebx-markdown", version.ref = "kobweb" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
@@ -47,6 +52,6 @@ kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 malefic = ["malefic-theming", "malefic-comps"]
 ktor = ["ktor-client-content-negotiation", "ktor-client-core", "ktor-serialization-kotlinx-json"]
 coil = ["coil-compose", "coil-network-ktor"]
-compose = []
-kobweb = ["kobweb-core", "kobweb-silk-core"]
+compose = ["compose-html-core", "compose-runtime"]
+kobweb = ["kobweb-core", "kobweb-silk"]
 silk-icons = ["kobweb-silk-icons-fa"]
