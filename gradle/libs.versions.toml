@@ -10,7 +10,7 @@ ktor = "3.3.0"
 materialIconsCore = "1.7.3"
 navigationCompose = "2.9.0"
 lifecycleCompose = "2.9.4"
-malefic-theming = "2.1.0"
+malefic-theming = "2.1.2"
 malefic-comps = "2.0.1"
 
 [libraries]
