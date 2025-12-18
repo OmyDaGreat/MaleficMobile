@@ -45,7 +45,7 @@ jobs:
           fetch-depth: 0
 
       - name: Download Android APK
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v7
         with:
           name: android-apk
           path: artifacts/android
