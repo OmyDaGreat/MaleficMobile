@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - dev
+  pull_request:
 
 permissions:
   contents: write
@@ -38,6 +39,7 @@ jobs:
 
   release:
     needs: [build-android]
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
