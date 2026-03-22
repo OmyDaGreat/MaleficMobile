@@ -9,7 +9,7 @@ kobweb = "0.23.3"
 ktor = "3.3.3"
 materialIconsCore = "1.7.3"
 navigationCompose = "2.9.1"
-lifecycleCompose = "2.9.6"
+lifecycleCompose = "2.10.0"
 malefic-theming = "2.1.2"
 malefic-comps = "2.0.1"
 
