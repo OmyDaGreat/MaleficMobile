@@ -32,7 +32,7 @@ jobs:
         run: ./gradlew :composeApp:assembleDebug
 
       - name: Upload Android APK
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: android-apk
           path: composeApp/build/outputs/apk/debug/*.apk
