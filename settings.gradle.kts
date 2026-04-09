@@ -16,6 +16,9 @@ pluginManagement {
         maven("https://us-central1-maven.pkg.dev/varabyte-repos/public")
     }
 }
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+}
 
 dependencyResolutionManagement {
     repositories {
@@ -32,5 +35,6 @@ dependencyResolutionManagement {
     }
 }
 
-include(":composeApp")
+include(":androidApp")
+include(":shared")
 include(":docs-site")

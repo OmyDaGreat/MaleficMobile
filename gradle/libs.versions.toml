@@ -1,12 +1,14 @@
 [versions]
-agp = "8.13.2"
+agp = "9.1.0"
 androidx-activityCompose = "1.13.0"
 androidx-ui-tooling = "1.10.6"
 coil = "3.4.0"
-compose-multiplatform = "1.10.3"
+componentsResources = "1.10.3"
+compose = "1.10.3"
 kotlin = "2.3.20"
 kobweb = "0.24.0"
 ktor = "3.4.2"
+material3 = "1.9.0"
 materialIconsCore = "1.7.3"
 navigationCompose = "2.9.2"
 lifecycleCompose = "2.10.0"
@@ -19,14 +21,18 @@ androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", versi
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "androidx-ui-tooling" }
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 coil-network-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor3", version.ref = "coil" }
+components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "componentsResources" }
+compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose" }
+compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
+compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose" }
+compose-ui-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose" }
+compose-html-core = { group = "org.jetbrains.compose.html", name = "html-core", version.ref = "compose" }
+compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "compose" }
 kobweb-core = { group = "com.varabyte.kobweb", name = "kobweb-core", version.ref = "kobweb" }
 kobweb-silk = { group = "com.varabyte.kobweb", name = "kobweb-silk", version.ref = "kobweb" }
-kobweb-silk-core = { group = "com.varabyte.kobweb", name = "kobweb-silk", version.ref = "kobweb" }
 kobweb-silk-icons-fa = { group = "com.varabyte.kobwebx", name = "silk-icons-fa", version.ref = "kobweb" }
 kobwebx-serialization-kotlinx = { group = "com.varabyte.kobwebx", name = "kobwebx-serialization-kotlinx", version.ref = "kobweb" }
 silk-foundation = { group = "com.varabyte.kobweb", name = "silk-foundation", version.ref = "kobweb" }
-compose-html-core = { group = "org.jetbrains.compose.html", name = "html-core", version.ref = "compose-multiplatform" }
-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "compose-multiplatform" }
 kobwebx-markdown = { group = "com.varabyte.kobwebx", name = "kobwebx-markdown", version.ref = "kobweb" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
@@ -41,8 +47,9 @@ malefic-comps = { group = "xyz.malefic.compose", name = "comps", version.ref = "
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
 kobweb-application = { id = "com.varabyte.kobweb.application", version.ref = "kobweb" }
 kobwebx-markdown = { id = "com.varabyte.kobwebx.markdown", version.ref = "kobweb" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
