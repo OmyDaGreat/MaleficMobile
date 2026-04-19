@@ -1,5 +1,5 @@
 [versions]
-agp = "9.1.0"
+agp = "9.1.1"
 androidx-activityCompose = "1.13.0"
 androidx-ui-tooling = "1.10.6"
 coil = "3.4.0"
@@ -31,9 +31,6 @@ compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", v
 kobweb-core = { group = "com.varabyte.kobweb", name = "kobweb-core", version.ref = "kobweb" }
 kobweb-silk = { group = "com.varabyte.kobweb", name = "kobweb-silk", version.ref = "kobweb" }
 kobweb-silk-icons-fa = { group = "com.varabyte.kobwebx", name = "silk-icons-fa", version.ref = "kobweb" }
-kobwebx-serialization-kotlinx = { group = "com.varabyte.kobwebx", name = "kobwebx-serialization-kotlinx", version.ref = "kobweb" }
-silk-foundation = { group = "com.varabyte.kobweb", name = "silk-foundation", version.ref = "kobweb" }
-kobwebx-markdown = { group = "com.varabyte.kobwebx", name = "kobwebx-markdown", version.ref = "kobweb" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
@@ -51,7 +48,6 @@ android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
 kobweb-application = { id = "com.varabyte.kobweb.application", version.ref = "kobweb" }
-kobwebx-markdown = { id = "com.varabyte.kobwebx.markdown", version.ref = "kobweb" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
