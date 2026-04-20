@@ -6,7 +6,6 @@ coil = "3.4.0"
 componentsResources = "1.10.3"
 compose = "1.10.3"
 kotlin = "2.3.20"
-kobweb = "0.24.0"
 ktor = "3.4.2"
 material3 = "1.9.0"
 materialIconsCore = "1.7.3"
@@ -26,11 +25,7 @@ compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", v
 compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
 compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose" }
 compose-ui-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose" }
-compose-html-core = { group = "org.jetbrains.compose.html", name = "html-core", version.ref = "compose" }
 compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "compose" }
-kobweb-core = { group = "com.varabyte.kobweb", name = "kobweb-core", version.ref = "kobweb" }
-kobweb-silk = { group = "com.varabyte.kobweb", name = "kobweb-silk", version.ref = "kobweb" }
-kobweb-silk-icons-fa = { group = "com.varabyte.kobwebx", name = "silk-icons-fa", version.ref = "kobweb" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
@@ -47,7 +42,6 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
-kobweb-application = { id = "com.varabyte.kobweb.application", version.ref = "kobweb" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
@@ -55,6 +49,3 @@ kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 malefic = ["malefic-theming", "malefic-comps"]
 ktor = ["ktor-client-content-negotiation", "ktor-client-core", "ktor-serialization-kotlinx-json"]
 coil = ["coil-compose", "coil-network-ktor"]
-compose = ["compose-html-core", "compose-runtime"]
-kobweb = ["kobweb-core", "kobweb-silk"]
-silk-icons = ["kobweb-silk-icons-fa"]

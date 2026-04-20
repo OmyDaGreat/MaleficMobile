@@ -13,7 +13,6 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-        maven("https://us-central1-maven.pkg.dev/varabyte-repos/public")
     }
 }
 plugins {
@@ -31,10 +30,8 @@ dependencyResolutionManagement {
         }
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-        maven("https://us-central1-maven.pkg.dev/varabyte-repos/public")
     }
 }
 
 include(":androidApp")
 include(":shared")
-include(":docs-site")
