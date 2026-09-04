@@ -2,7 +2,7 @@
 agp = "9.1.1"
 androidx-activityCompose = "1.13.0"
 androidx-ui-tooling = "1.10.6"
-coil = "3.4.0"
+coil = "3.6.2"
 componentsResources = "1.10.3"
 compose = "1.10.3"
 kotlin = "2.3.20"
